@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Project_X</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_main">Главная</string>
+    <string name="button_add">Добавить доход</string>
+    <string name="button_sub">Добавить расход</string>
+    <string name="button_cat">Категории</string>
+    <string name="button_acc">Счета</string>
+    <string name="button_reg">Регулярные платежи</string>
+    <string name="button_grap">Графики</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="add_name">Добавление дохода</string>
+    <string name="hint_add">Введите сумму</string>
+    <string name="Account">Счет</string>
+    <string name="Categories">Категории</string>
+    <string name="Button_add">Добавить</string>
+</resources>
