@@ -25,4 +25,5 @@
     <string name="Summary">Текущий баланс</string>
     <string name="Comments">Заметка</string>
     <string name="hint_comment">Введите заметку</string>
+    <string name="cat_name">Категории</string>
 </resources>

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private Button btnGoAdd, btnGoSub;
+    private Button btnGoAdd, btnGoSub, btnGoCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         btnGoSub.setOnClickListener(
                 v -> {
                     Intent intent = new Intent("com.example.project_x.SubActivity");
+                    startActivity(intent);
+                }
+        );
+        btnGoCat = findViewById(R.id.button_go_to_cat);
+        btnGoCat.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent("com.example.project_x.CatActivity");
                     startActivity(intent);
                 }
         );
