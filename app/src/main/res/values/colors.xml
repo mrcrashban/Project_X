@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="app_background">#B3B2B2</color>
+    <color name="green_button">#78BF90</color>
+    <color name="red_button">#C57474</color>
 </resources>
