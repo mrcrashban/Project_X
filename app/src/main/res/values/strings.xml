@@ -23,4 +23,6 @@
     <string name="Categories">Категории</string>
     <string name="Button_add">Добавить</string>
     <string name="Summary">Текущий баланс</string>
+    <string name="Comments">Заметка</string>
+    <string name="hint_comment">Введите заметку</string>
 </resources>
