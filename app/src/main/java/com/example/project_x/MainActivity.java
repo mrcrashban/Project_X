@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,23 +30,31 @@ public class MainActivity extends AppCompatActivity {
     private final String accounts_names[] = {
             "main",
             "cash",
-            "seco"
+            "main",
+            "seco",
+            "main"
     };
     private final String categories_names[] = {
             "products",
             "car",
-            "house"
+            "house",
+            "products",
+            "sport"
     };
     private final String amounts[] = {
             "1000",
             "345",
-            "415"
+            "415",
+            "674",
+            "500"
     };
 
     private final String comments[] = {
             "a lot",
             "washing",
-            "vacuum"
+            "vacuum",
+            "",
+            "buy personal train"
     };
 
     static class Block {
@@ -85,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private MyAdapter myAdapter;
+    private TextView ResultView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +141,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         myAdapter = new MyAdapter(genData());
         recyclerView.setAdapter(myAdapter);
+        ResultView = findViewById(R.id.balance_view);
+        genSum();
 
+    }
+
+    public void genSum() {
+        int sum = 0;
+        ArrayList<Block> list = new ArrayList<>();
+        for(int i=0;i<amounts.length;i++){
+            sum = sum + Integer.parseInt(amounts[i]);
+        }
+        ResultView.setText(String.valueOf(sum));
     }
 
     public ArrayList<Block> genData() {
