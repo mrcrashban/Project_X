@@ -2,11 +2,9 @@ package com.example.project_x;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -15,14 +13,78 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_x.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private Button btnGoAdd, btnGoSub, btnGoCat;
+
+    private final String accounts_names[] = {
+            "main",
+            "cash",
+            "seco"
+    };
+    private final String categories_names[] = {
+            "products",
+            "car",
+            "house"
+    };
+    private final String amounts[] = {
+            "1000",
+            "345",
+            "415"
+    };
+
+    private final String comments[] = {
+            "a lot",
+            "washing",
+            "vacuum"
+    };
+
+    static class Block {
+        private String accounts;
+        private String categories;
+        private String comments;
+        private String amounts;
+
+        public String getAccounts() {
+            return accounts;
+        }
+
+        public void setAccounts(String accounts) {
+            this.accounts = accounts;
+        }
+
+        public String getCategories() {
+            return categories;
+        }
+
+        public void setCategories(String categories) { this.categories = categories; }
+
+        public String getAmounts() { return amounts; }
+
+        public void setAmounts(String amounts) { this.amounts = amounts; }
+
+        public String getComments() { return comments; }
+
+        public void setComments(String comments) { this.comments = comments; }
+
+        public Block(String accounts, String categories, String amounts, String comments){
+            this.accounts = accounts;
+            this.categories = categories;
+            this.amounts = amounts;
+            this.comments = comments;
+        }
+    }
+
+    private MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +126,20 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
         );
+        RecyclerView recyclerView = findViewById(R.id.RecyclerView_main);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        myAdapter = new MyAdapter(genData());
+        recyclerView.setAdapter(myAdapter);
 
+    }
+
+    public ArrayList<Block> genData() {
+        ArrayList<Block> list = new ArrayList<>();
+        for(int i=0;i<accounts_names.length;i++) {
+            list.add(new Block(accounts_names[i],categories_names[i],amounts[i],comments[i]));
+        }
+        return list;
     }
 
     @Override
