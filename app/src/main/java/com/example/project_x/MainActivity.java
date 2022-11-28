@@ -3,6 +3,7 @@ package com.example.project_x;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private Button btnGoAdd, btnGoSub, btnGoCat;
+    private Button btnGoAdd, btnGoSub, btnGoCat, btnGoAcc;
 
     private final String accounts_names[] = {
             "main",
@@ -116,13 +117,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         btnGoAdd = findViewById(R.id.button_go_to_add);
+        btnGoSub = findViewById(R.id.button_go_to_sub);
+        btnGoCat = findViewById(R.id.button_go_to_cat);
+        btnGoAcc = findViewById(R.id.button_go_to_acc);
         btnGoAdd.setOnClickListener(
                 v -> {
                     Intent intent = new Intent("com.example.project_x.AddActivity");
                     startActivity(intent);
                 }
         );
-        btnGoSub = findViewById(R.id.button_go_to_sub);
         btnGoSub.setOnClickListener(
                 v -> {
                     Intent intent = new Intent("com.example.project_x.SubActivity");
@@ -136,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
         );
+        btnGoAcc.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent("com.example.project_x.activity_acc");
+                    startActivity(intent);
+                }
+        );
+
         RecyclerView recyclerView = findViewById(R.id.RecyclerView_main);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -145,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         genSum();
 
     }
+
 
     public void genSum() {
         int sum = 0;

@@ -8,7 +8,7 @@ import java.util.List;
 import io.reactivex.Flowable;
 
 @Dao
-public interface CategoriesDao {
-    @Query("SELECT * FROM Categories")
-    Flowable<List<Categories>> getCategories();
+public interface AccountsDao {
+    @Query("SELECT * FROM Accounts")
+    Flowable<List<Accounts>> getAccounts();
 }

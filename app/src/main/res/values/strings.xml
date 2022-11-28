@@ -20,6 +20,7 @@
     <string name="sub_name">Добавление расхода</string>
     <string name="hint_add">Введите сумму</string>
     <string name="Account">Счет</string>
+    <string name="Accounts">Счета</string>
     <string name="Categories">Категории</string>
     <string name="Button_add">Добавить</string>
     <string name="Summary">Текущий баланс</string>
@@ -27,8 +28,12 @@
     <string name="hint_comment">Введите заметку</string>
     <string name="cat_name">Категории</string>
     <string name="Button_add_cat">Добавить категорию</string>
+    <string name="Button_add_acc">Добавить счет</string>
     <string name="cat_hint">Введите название категории</string>
+    <string name="acc_hint">Введите название счета</string>
     <string name="add_cat_alert">Добавление активности</string>
+    <string name="add_acc_alert">Добавление счета</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
+
 </resources>

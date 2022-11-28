@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Project_X"
         tools:targetApi="31">
         <activity
+            android:name=".activity_acc"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.project_x.activity_acc" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CatActivity"
             android:exported="false">
             <intent-filter>
@@ -20,6 +32,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

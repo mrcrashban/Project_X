@@ -5,21 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background"
-    tools:context=".CatActivity">
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/cat_name"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".activity_acc">
 
     <ImageButton
-        android:id="@+id/go_back_cat"
+        android:id="@+id/go_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -31,28 +20,36 @@
         app:srcCompat="?attr/actionModeCloseDrawable"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:fontFamily="serif"
+        android:text="@string/Accounts"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-        android:id="@+id/add_category"
+        android:id="@+id/account_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/green_button"
-        android:text="@string/Button_add_cat"
-        android:textAllCaps="false"
+        android:text="@string/Button_add_acc"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categories_view"
-        android:layout_width="399dp"
-        android:layout_height="692dp"
-        android:layout_marginStart="5dp"
+        android:id="@+id/accounts_view"
+        android:layout_width="389dp"
+        android:layout_height="693dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 </androidx.constraintlayout.widget.ConstraintLayout>
