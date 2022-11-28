@@ -6,4 +6,5 @@ import androidx.room.RoomDatabase;
 @Database(entities = {Transactions.class, Categories.class, Accounts.class}, version = 1)
 public abstract class AppDB extends RoomDatabase {
     public abstract MainDao MainDao();
+    public abstract CategoriesDao CategoriesDao();
 }

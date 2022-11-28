@@ -26,4 +26,9 @@
     <string name="Comments">Заметка</string>
     <string name="hint_comment">Введите заметку</string>
     <string name="cat_name">Категории</string>
+    <string name="Button_add_cat">Добавить категорию</string>
+    <string name="cat_hint">Введите название категории</string>
+    <string name="add_cat_alert">Добавление активности</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
 </resources>
