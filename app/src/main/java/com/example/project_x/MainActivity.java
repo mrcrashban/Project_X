@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.project_x.Adapters.TransactionsAdapter;
+import com.example.project_x.BD.DBClient;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -22,88 +24,21 @@ import com.example.project_x.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private Button btnGoAdd, btnGoSub, btnGoCat, btnGoAcc;
-
-    private final String accounts_names[] = {
-            "main",
-            "cash",
-            "main",
-            "seco",
-            "main"
-    };
-    private final String categories_names[] = {
-            "products",
-            "car",
-            "house",
-            "products",
-            "sport"
-    };
-    private final String amounts[] = {
-            "1000",
-            "345",
-            "415",
-            "674",
-            "500"
-    };
-
-    private final String comments[] = {
-            "a lot",
-            "washing",
-            "vacuum",
-            "",
-            "buy personal train"
-    };
-
-    static class Block {
-        private String accounts;
-        private String categories;
-        private String comments;
-        private String amounts;
-
-        public String getAccounts() {
-            return accounts;
-        }
-
-        public void setAccounts(String accounts) {
-            this.accounts = accounts;
-        }
-
-        public String getCategories() {
-            return categories;
-        }
-
-        public void setCategories(String categories) { this.categories = categories; }
-
-        public String getAmounts() { return amounts; }
-
-        public void setAmounts(String amounts) { this.amounts = amounts; }
-
-        public String getComments() { return comments; }
-
-        public void setComments(String comments) { this.comments = comments; }
-
-        public Block(String accounts, String categories, String amounts, String comments){
-            this.accounts = accounts;
-            this.categories = categories;
-            this.amounts = amounts;
-            this.comments = comments;
-        }
-    }
-
-    private MyAdapter myAdapter;
-    private TextView ResultView;
+    private RecyclerView TransactionsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -116,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
         btnGoAdd = findViewById(R.id.button_go_to_add);
         btnGoSub = findViewById(R.id.button_go_to_sub);
         btnGoCat = findViewById(R.id.button_go_to_cat);
@@ -146,33 +82,25 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        RecyclerView recyclerView = findViewById(R.id.RecyclerView_main);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        myAdapter = new MyAdapter(genData());
-        recyclerView.setAdapter(myAdapter);
-        ResultView = findViewById(R.id.balance_view);
-        genSum();
-
+        TransactionsView = findViewById(R.id.RecyclerView_main);
+        TransactionsView.setLayoutManager(new LinearLayoutManager(this));
+        Disposable disposable = DBClient
+                .getInstance(getApplicationContext())
+                .getAppDatabase()
+                .MainDao()
+                .getAll()
+                // поток интерфейса UI - наблюдает за изменениями Flowable данных
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(transactions -> {
+                    TransactionsAdapter adapter = new TransactionsAdapter(MainActivity.this, transactions);
+                    TransactionsView.setAdapter(adapter);
+                });
     }
 
 
-    public void genSum() {
-        int sum = 0;
-        ArrayList<Block> list = new ArrayList<>();
-        for(int i=0;i<amounts.length;i++){
-            sum = sum + Integer.parseInt(amounts[i]);
-        }
-        ResultView.setText(String.valueOf(sum));
-    }
 
-    public ArrayList<Block> genData() {
-        ArrayList<Block> list = new ArrayList<>();
-        for(int i=0;i<accounts_names.length;i++) {
-            list.add(new Block(accounts_names[i],categories_names[i],amounts[i],comments[i]));
-        }
-        return list;
-    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
