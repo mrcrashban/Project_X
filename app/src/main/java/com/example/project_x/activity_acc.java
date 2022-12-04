@@ -60,4 +60,3 @@ public class activity_acc extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PIECE_SAVE);
     }
 }
-

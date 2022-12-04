@@ -18,7 +18,7 @@ import com.example.project_x.BD.DBClient;
 
 public class AccountsDialogFragment extends DialogFragment {
     private Context context;
-    public static final String TAG_DIALOG_PIECE_SAVE = "account_save";
+    public static final String TAG_DIALOG_ACCOUNT_SAVE = "account_save";
 
     @Override
     public void onAttach(@NonNull Context context) {
