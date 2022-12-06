@@ -42,7 +42,7 @@ public class activity_acc extends AppCompatActivity {
                 }
         );
         add_acc = findViewById(R.id.account_add);
-        add_acc.setOnClickListener(view -> showDialog());
+        add_acc.setOnClickListener(view -> showDialogAcc());
         Disposable disposable = DBClient
                 .getInstance(getApplicationContext())
                 .getAppDatabase()
@@ -55,7 +55,7 @@ public class activity_acc extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                 });
     }
-    private void showDialog() {
+    public void showDialogAcc() {
         DialogFragment dialogFragment = new AccountsDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_PIECE_SAVE);
     }

@@ -1,5 +1,7 @@
 package com.example.project_x.Adapters;
 
+import static com.example.project_x.CategoriesDialogFragment.TAG_DIALOG_PIECE_SAVE;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,17 +9,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_x.AccountsDialogFragment;
 import com.example.project_x.BD.Accounts;
 import com.example.project_x.BD.Categories;
+import com.example.project_x.BD.DBClient;
 import com.example.project_x.R;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
+
 public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.AccountsViewHolder>{
-    private final Context context;
+    private static Context context;
     private final List<Accounts> AccountsList;
+    private static Accounts account;
+    private String money;
 
     public AccountsAdapter(Context mCtx, List<Accounts> AccountsList) {
         this.context = mCtx;
@@ -54,7 +64,10 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.Accoun
 
         @Override
         public void onClick(View view) {
-
+            new Thread(()->{
+                account = DBClient.getInstance(context.getApplicationContext()).getAppDatabase().AccountsDao().getAccount();
+                DBClient.getInstance(context.getApplicationContext()).getAppDatabase().AccountsDao().delete(account);
+            }).start();
         }
     }
 }
