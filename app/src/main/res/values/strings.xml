@@ -20,8 +20,14 @@
     <string name="sub_name">Добавление расхода</string>
     <string name="hint_add">Введите сумму</string>
     <string name="Account">Счет</string>
+    <string name="Account_with">Счет:</string>
     <string name="Accounts">Счета</string>
+    <string name="Sum_with">Сумма:</string>
+    <string name="Type_with">Тип:</string>
+    <string name="Date_with">Дата:</string>
+    <string name="Comment_with">Заметка:</string>
     <string name="Categories">Категории</string>
+    <string name="Category">Категория:</string>
     <string name="Button_add">Добавить</string>
     <string name="Summary">Текущий баланс</string>
     <string name="Comments">Заметка</string>

@@ -71,7 +71,6 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         public void onClick(View view) {
             Trans_Acc_Cat transactions = TransactionsList.get(getAdapterPosition());
             Intent intent = new Intent(context, UpdateTransactionActivity.class);
-            intent.putExtra("transaction", (CharSequence) transactions);
 
             context.startActivity(intent);
         }
