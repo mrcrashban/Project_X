@@ -31,7 +31,7 @@
     <string name="Button_add_acc">Добавить счет</string>
     <string name="cat_hint">Введите название категории</string>
     <string name="acc_hint">Введите название счета</string>
-    <string name="add_cat_alert">Добавление активности</string>
+    <string name="add_cat_alert">Добавление категории</string>
     <string name="add_acc_alert">Добавление счета</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
@@ -39,4 +39,11 @@
     <string name="date_input">Введите дату</string>
     <string name="date">Дата</string>
     <string name="required">Необходимо заполнить!</string>
+    <string name="update_transaction">Редактирование транзакции</string>
+    <string name="sum">Сумма</string>
+    <string name="Button_update">Изменить</string>
+    <string name="Button_delete">Удалить</string>
+    <string name="sure">Вы уверены?</string>
+    <string name="ok">Да</string>
+    <string name="no">Нет</string>
 </resources>

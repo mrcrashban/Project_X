@@ -1,6 +1,7 @@
 package com.example.project_x.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_x.BD.Trans_Acc_Cat;
+import com.example.project_x.BD.Transactions;
 import com.example.project_x.R;
+import com.example.project_x.UpdateTransactionActivity;
 
 import java.util.List;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.TransactionsViewHolder>{
-    private final Context context;
-    private final List<Trans_Acc_Cat> TransactionsList;
+    private static Context context;
+    private static List<Trans_Acc_Cat> TransactionsList;
 
     public TransactionsAdapter(Context mCtx, List<Trans_Acc_Cat> TransactionsList) {
         this.context = mCtx;
@@ -33,8 +36,8 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     @Override
     public void onBindViewHolder(TransactionsViewHolder holder, int position) {
         Trans_Acc_Cat t = TransactionsList.get(position);
-        holder.textViewAccount.setText(t.getAccount().toString());
-        holder.textViewCategory.setText(t.getCategory().toString());
+        holder.textViewAccount.setText(t.getAccount());
+        holder.textViewCategory.setText(t.getCategory());
         holder.textViewType.setText(t.getType());
         holder.textViewSum.setText(t.getSum());
         holder.textViewDate.setText(t.getDate());
@@ -66,9 +69,12 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
         @Override
         public void onClick(View view) {
+            Trans_Acc_Cat transactions = TransactionsList.get(getAdapterPosition());
+            Intent intent = new Intent(context, UpdateTransactionActivity.class);
+            intent.putExtra("transaction", (CharSequence) transactions);
 
+            context.startActivity(intent);
         }
-
     }
 
 }

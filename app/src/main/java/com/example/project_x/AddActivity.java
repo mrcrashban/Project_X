@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 
 import com.example.project_x.Adapters.AccountsAdapter;
 import com.example.project_x.Adapters.CategoriesAdapter;
+import com.example.project_x.BD.Accounts;
 import com.example.project_x.BD.AppDB;
 import com.example.project_x.BD.DBClient;
 import com.example.project_x.BD.MainDao;
@@ -80,28 +82,11 @@ public class AddActivity extends AppCompatActivity {
         if (sComment.isEmpty()) {
             return;
         }
-
-        class SaveTask extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                Transactions transaction = new Transactions(sAcc,sCat,type,sSum,sDate,sComment);
-                DBClient.getInstance(getApplicationContext()).getAppDatabase()
-                        .MainDao()
-                        .insert(transaction);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                finish();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
+        new Thread(() -> {
+            DBClient.getInstance(context).getAppDatabase()
+                    .MainDao()
+                    .insert(new Transactions(sAcc, sCat, type, sSum, sDate, sComment));
+            }).start();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
-        SaveTask st = new SaveTask();
-        st.execute();
     }
-
-}

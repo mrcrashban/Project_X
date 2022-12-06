@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity
-public class Transactions {
+public class Transactions implements Serializable{
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -50,9 +50,7 @@ public class Transactions {
         return account;
     }
 
-    public void setAccount(Integer account) {
-        this.account = account;
-    }
+    public void setAccount(Integer account) { this.account = account; }
 
     public Integer getCategory() { return category; }
 
