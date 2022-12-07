@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_x.BD.DBClient;
 import com.example.project_x.BD.Trans_Acc_Cat;
 import com.example.project_x.BD.Transactions;
 import com.example.project_x.R;
@@ -19,9 +20,9 @@ import java.util.List;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.TransactionsViewHolder>{
     private static Context context;
-    private static List<Trans_Acc_Cat> TransactionsList;
+    private static List<Transactions> TransactionsList;
 
-    public TransactionsAdapter(Context mCtx, List<Trans_Acc_Cat> TransactionsList) {
+    public TransactionsAdapter(Context mCtx, List<Transactions> TransactionsList) {
         this.context = mCtx;
         this.TransactionsList = TransactionsList;
     }
@@ -35,7 +36,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     @Override
     public void onBindViewHolder(TransactionsViewHolder holder, int position) {
-        Trans_Acc_Cat t = TransactionsList.get(position);
+        Transactions t = TransactionsList.get(position);
         holder.textViewAccount.setText(t.getAccount());
         holder.textViewCategory.setText(t.getCategory());
         holder.textViewType.setText(t.getType());
@@ -69,10 +70,12 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
         @Override
         public void onClick(View view) {
-            Trans_Acc_Cat transactions = TransactionsList.get(getAdapterPosition());
+            new Thread(()->{
+            Transactions transactions = TransactionsList.get(getAdapterPosition());
             Intent intent = new Intent(context, UpdateTransactionActivity.class);
-
+                intent.putExtra("transactions", transactions);
             context.startActivity(intent);
+            }).start();
         }
     }
 

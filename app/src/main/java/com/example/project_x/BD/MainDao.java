@@ -12,8 +12,8 @@ import io.reactivex.Flowable;
 
 @Dao
 public interface MainDao {
-    @Query("SELECT account_name as account, category_name AS category, type, sum, date, comment FROM Transactions, Categories, Accounts WHERE Categories.id == Transactions.category and Accounts.id == Transactions.account")
-    Flowable<List<Trans_Acc_Cat>> getAll();
+    @Query("SELECT * FROM Transactions")
+    Flowable<List<Transactions>> getAll();
 
     @Insert
     void insert(Transactions t);

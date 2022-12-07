@@ -52,7 +52,7 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.Accoun
         return AccountsList.size();
     }
 
-    static class AccountsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class AccountsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewAccount;
 
@@ -65,8 +65,8 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.Accoun
         @Override
         public void onClick(View view) {
             new Thread(()->{
-                account = DBClient.getInstance(context.getApplicationContext()).getAppDatabase().AccountsDao().getAccount();
-                DBClient.getInstance(context.getApplicationContext()).getAppDatabase().AccountsDao().delete(account);
+                Accounts a = AccountsList.get(getAdapterPosition());
+                DBClient.getInstance(context.getApplicationContext()).getAppDatabase().AccountsDao().delete(a);
             }).start();
         }
     }

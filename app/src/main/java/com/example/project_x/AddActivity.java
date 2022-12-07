@@ -57,8 +57,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void saveTask() {
-        final Integer sAcc = Integer.valueOf(add_acc_insert.getText().toString());
-        final Integer sCat = Integer.valueOf(add_cat_insert.getText().toString());
+        final String sAcc = add_acc_insert.getText().toString();
+        final String sCat = add_cat_insert.getText().toString();
         final String sSum = add_sum_insert.getText().toString();
         final String sDate = add_date_insert.getText().toString();
         final String sComment = add_comment_insert.getText().toString();

@@ -1,6 +1,8 @@
 package com.example.project_x.BD;
 
-public class Trans_Acc_Cat {
+import java.io.Serializable;
+
+public class Trans_Acc_Cat implements Serializable {
     public String account;
     public String category;
     public String type;

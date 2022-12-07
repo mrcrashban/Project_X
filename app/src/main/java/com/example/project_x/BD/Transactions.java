@@ -12,10 +12,10 @@ public class Transactions implements Serializable{
     private int id;
 
     @ColumnInfo
-    private Integer account;
+    private String account;
 
     @ColumnInfo
-    private Integer category;
+    private String category;
 
     @ColumnInfo
     private String type;
@@ -29,7 +29,7 @@ public class Transactions implements Serializable{
     @ColumnInfo
     private String comment;
 
-    public Transactions(Integer account, Integer category, String type, String sum, String date, String comment) {
+    public Transactions(String account, String category, String type, String sum, String date, String comment) {
         this.account = account;
         this.category = category;
         this.type = type;
@@ -46,15 +46,15 @@ public class Transactions implements Serializable{
         this.id = id;
     }
 
-    public Integer getAccount() {
+    public String getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) { this.account = account; }
+    public void setAccount(String account) { this.account = account; }
 
-    public Integer getCategory() { return category; }
+    public String getCategory() { return category; }
 
-    public void setCategory(Integer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
