@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private Button btnGoAdd, btnGoSub, btnGoCat, btnGoAcc;
     private RecyclerView TransactionsView;
-    private Integer i;
+    private int i, sum;
     private TextView textView;
 
     @Override
@@ -101,8 +101,23 @@ public class MainActivity extends AppCompatActivity {
                     TransactionsAdapter adapter = new TransactionsAdapter(MainActivity.this, transactions);
                     TransactionsView.setAdapter(adapter);
                 });
+        runThread();
     }
 
+    private void runThread() {
+
+        new Thread() {
+            public void run() {
+                sum = 0;
+                while (i++ < 5) {
+                    runOnUiThread(() -> {
+                        sum = sum + 1;
+                        textView.setText(String.valueOf(sum));
+                    });
+                }
+            }
+        }.start();
+    }
 
 
 

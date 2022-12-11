@@ -1,15 +1,11 @@
 package com.example.project_x;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,28 +13,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.project_x.Adapters.AccountsAdapter;
-import com.example.project_x.Adapters.CategoriesAdapter;
-import com.example.project_x.BD.Accounts;
-import com.example.project_x.BD.AppDB;
 import com.example.project_x.BD.DBClient;
-import com.example.project_x.BD.MainDao;
 import com.example.project_x.BD.Transactions;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 
 public class AddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Context context;
     private ImageButton go_back;
     private Button add_button;
-    private EditText add_sum_insert, add_cat_insert, add_date_insert, add_comment_insert;
-    private String type, add_acc_insert;
+    private EditText add_sum_insert, add_date_insert, add_comment_insert;
+    private String type, add_acc_insert, add_cat_insert;
     private String[] accounts = {"main","second","cash","credit card"};
-    private Spinner spinner;
+    private String[] categories = {"salary","percent","shop","car"};
+    private Spinner spinner_account, spinner_category;
 
 
     @SuppressLint("MissingInflatedId")
@@ -47,7 +35,6 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         add_sum_insert = findViewById(R.id.add_sum_insert);
-        add_cat_insert = findViewById(R.id.add_cat_insert);
         add_date_insert = findViewById(R.id.add_date_insert);
         add_comment_insert = findViewById(R.id.add_comment_insert);
         go_back = findViewById(R.id.go_back_add);
@@ -58,18 +45,24 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                 }
         );
         type = "add";
+        add_cat_insert = "test";
         add_button = findViewById(R.id.transaction_add);
         add_button.setOnClickListener(view -> saveTask());
-        spinner = findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, accounts );
-        spinner.setAdapter(adapter);
+        spinner_category = findViewById(R.id.spinner_category);
+        spinner_account = findViewById(R.id.spinner_account);
+        spinner_account.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapter_acc = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, accounts);
+        spinner_account.setAdapter(adapter_acc);
+        spinner_category.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapter_cat = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, categories);
+        spinner_category.setAdapter(adapter_cat);
     }
 
     private void saveTask() {
         final String sAcc = add_acc_insert;
-        final String sCat = add_cat_insert.getText().toString();
+        final String sCat = add_cat_insert;
         final String sSum = add_sum_insert.getText().toString();
         final String sDate = add_date_insert.getText().toString();
         final String sComment = add_comment_insert.getText().toString();
@@ -99,9 +92,14 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
+    @SuppressLint("ResourceType")
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        add_acc_insert = adapterView.getSelectedItem().toString();
+        if (adapterView.getId() == 2131362358) {
+            add_cat_insert = adapterView.getSelectedItem().toString();
+        } else {
+            add_acc_insert = adapterView.getSelectedItem().toString();
+        }
     }
 
     @Override
