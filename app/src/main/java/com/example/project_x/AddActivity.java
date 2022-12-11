@@ -35,7 +35,7 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         add_sum_insert = findViewById(R.id.add_sum_insert);
-        add_date_insert = findViewById(R.id.add_date_insert);
+        add_date_insert = findViewById(R.id.add_date_insert_sub);
         add_comment_insert = findViewById(R.id.add_comment_insert);
         go_back = findViewById(R.id.go_back_add);
         go_back.setOnClickListener(
@@ -45,7 +45,6 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
                 }
         );
         type = "add";
-        add_cat_insert = "test";
         add_button = findViewById(R.id.transaction_add);
         add_button.setOnClickListener(view -> saveTask());
         spinner_category = findViewById(R.id.spinner_category);
