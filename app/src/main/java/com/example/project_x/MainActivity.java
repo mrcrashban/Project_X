@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.project_x.Adapters.TransactionsAdapter;
 import com.example.project_x.BD.DBClient;
+import com.example.project_x.BD.Transactions;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -23,7 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project_x.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private Button btnGoAdd, btnGoSub, btnGoCat, btnGoAcc;
     private RecyclerView TransactionsView;
+    private Integer i;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         btnGoSub = findViewById(R.id.button_go_to_sub);
         btnGoCat = findViewById(R.id.button_go_to_cat);
         btnGoAcc = findViewById(R.id.button_go_to_acc);
+        textView = findViewById(R.id.textViewSummary);
         btnGoAdd.setOnClickListener(
                 v -> {
                     Intent intent = new Intent("com.example.project_x.AddActivity");
@@ -99,15 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
     public boolean onSupportNavigateUp() {

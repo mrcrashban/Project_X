@@ -11,11 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_x.BD.DBClient;
-import com.example.project_x.BD.Trans_Acc_Cat;
 import com.example.project_x.BD.Transactions;
 import com.example.project_x.R;
 import com.example.project_x.UpdateTransactionActivity;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.TransactionsViewHolder>{
@@ -43,6 +43,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         holder.textViewSum.setText(t.getSum());
         holder.textViewDate.setText(t.getDate());
         holder.textViewComment.setText(t.getComment());
+
     }
 
     @Override
@@ -52,7 +53,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     static class TransactionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewAccount, textViewCategory, textViewType, textViewSum, textViewDate, textViewComment;
+        TextView textViewAccount, textViewCategory, textViewType, textViewSum, textViewDate, textViewComment, textViewSummary;
 
         public TransactionsViewHolder(View itemView) {
             super(itemView);
@@ -63,7 +64,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             textViewSum = itemView.findViewById(R.id.textViewSum);
             textViewDate = itemView.findViewById(R.id.textViewDate);
             textViewComment = itemView.findViewById(R.id.textViewComment);
-
+            textViewSummary = itemView.findViewById(R.id.textViewSummary);
 
             itemView.setOnClickListener(this);
         }
@@ -78,6 +79,6 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             }).start();
         }
     }
-
 }
+
 

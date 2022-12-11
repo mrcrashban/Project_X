@@ -41,7 +41,6 @@ public class UpdateTransactionActivity extends AppCompatActivity {
         btn_update = findViewById(R.id.transaction_update);
         btn_update.setOnClickListener(view -> {
             updateTransaction(transactions);
-            startActivity(new Intent(UpdateTransactionActivity.this, MainActivity.class));
         });
         btn_delete = findViewById(R.id.transaction_delete);
         btn_delete.setOnClickListener(view -> {
@@ -91,11 +90,6 @@ public class UpdateTransactionActivity extends AppCompatActivity {
             return;
         }
 
-        if (sCom.isEmpty()) {
-            EditTextComment.setError(getResources().getString(R.string.required));
-            EditTextComment.requestFocus();
-            return;
-        }
 
         new Thread(()->{
             transactions.setAccount(sAcc);
@@ -106,6 +100,7 @@ public class UpdateTransactionActivity extends AppCompatActivity {
             transactions.setComment(sCom);
             DBClient.getInstance(getApplicationContext()).getAppDatabase().MainDao().update(transactions);
         }).start();
+        startActivity(new Intent(UpdateTransactionActivity.this, MainActivity.class));
     }
 
     private void deleteTransaction(Transactions transactions){

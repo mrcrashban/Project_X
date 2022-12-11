@@ -15,6 +15,9 @@ public interface MainDao {
     @Query("SELECT * FROM Transactions")
     Flowable<List<Transactions>> getAll();
 
+    @Query("SELECT * FROM Transactions")
+    List<Transactions> getSum();
+
     @Insert
     void insert(Transactions t);
 
