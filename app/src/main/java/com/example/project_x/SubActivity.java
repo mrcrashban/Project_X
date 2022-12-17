@@ -61,7 +61,7 @@ public class SubActivity extends AppCompatActivity implements AdapterView.OnItem
     private void saveTask() {
         final String sAcc = add_acc_insert;
         final String sCat = add_cat_insert;
-        final String sSum = add_sum_insert.getText().toString();
+        final String sSum = "-" + add_sum_insert.getText().toString();
         final String sDate = add_date_insert.getText().toString();
         final String sComment = add_comment_insert.getText().toString();
 

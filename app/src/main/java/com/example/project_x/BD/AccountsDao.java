@@ -16,6 +16,9 @@ public interface AccountsDao {
     @Query("SELECT * FROM Accounts where id = Accounts.id")
     Accounts getAccount();
 
+    @Query("SELECT account_name FROM Accounts")
+    List<String> getAccountsName();
+
     @Delete
     void delete(Accounts a);
 }

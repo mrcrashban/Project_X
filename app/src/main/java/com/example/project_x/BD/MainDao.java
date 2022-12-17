@@ -18,6 +18,10 @@ public interface MainDao {
     @Query("SELECT * FROM Transactions")
     List<Transactions> getSum();
 
+    @Query("SELECT sum FROM Transactions")
+    List<String> getTotal();
+
+
     @Insert
     void insert(Transactions t);
 

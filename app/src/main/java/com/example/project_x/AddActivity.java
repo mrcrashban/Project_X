@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import com.example.project_x.BD.DBClient;
 import com.example.project_x.BD.Transactions;
 
+import java.util.List;
+
 public class AddActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Context context;
@@ -24,8 +26,6 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     private Button add_button;
     private EditText add_sum_insert, add_date_insert, add_comment_insert;
     private String type, add_acc_insert, add_cat_insert;
-    private String[] accounts = {"main","second","cash","credit card"};
-    private String[] categories = {"salary","percent","shop","car"};
     private Spinner spinner_account, spinner_category;
 
 
@@ -47,16 +47,12 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         type = "add";
         add_button = findViewById(R.id.transaction_add);
         add_button.setOnClickListener(view -> saveTask());
-        spinner_category = findViewById(R.id.spinner_category);
         spinner_account = findViewById(R.id.spinner_account);
         spinner_account.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter_acc = new ArrayAdapter<>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, accounts);
-        spinner_account.setAdapter(adapter_acc);
+        runThreadAcc();
+        spinner_category = findViewById(R.id.spinner_category);
         spinner_category.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter_cat = new ArrayAdapter<>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, categories);
-        spinner_category.setAdapter(adapter_cat);
+        runThreadCat();
     }
 
     private void saveTask() {
@@ -66,19 +62,23 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
         final String sDate = add_date_insert.getText().toString();
         final String sComment = add_comment_insert.getText().toString();
 
-        if (sAcc.toString().isEmpty()){
+        if (sAcc.isEmpty()){
             return;
         }
 
-        if (sCat.toString().isEmpty()){
+        if (sCat.isEmpty()){
             return;
         }
 
         if (sSum.isEmpty()) {
+            add_sum_insert.setError(getResources().getString(R.string.required));
+            add_sum_insert.requestFocus();
             return;
         }
 
         if (sDate.isEmpty()) {
+            add_date_insert.setError(getResources().getString(R.string.required));
+            add_date_insert.requestFocus();
             return;
         }
 
@@ -90,6 +90,8 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
             }).start();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
+
+
 
     @SuppressLint("ResourceType")
     @Override
@@ -104,5 +106,38 @@ public class AddActivity extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void runThreadAcc() {
+
+        new Thread() {
+            public void run() {
+                int i = 0;
+                List<String> list = DBClient
+                            .getInstance(getApplicationContext())
+                            .getAppDatabase()
+                            .AccountsDao()
+                            .getAccountsName();
+                ArrayAdapter<String> adapter_acc = new ArrayAdapter<>(AddActivity.this,
+                        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+                spinner_account.setAdapter(adapter_acc);
+            }
+        }.start();
+    }
+    private void runThreadCat() {
+
+        new Thread() {
+            public void run() {
+                int i = 0;
+                List<String> list = DBClient
+                        .getInstance(getApplicationContext())
+                        .getAppDatabase()
+                        .CategoriesDao()
+                        .getCategoriesName();
+                ArrayAdapter<String> adapter_cat = new ArrayAdapter<>(AddActivity.this,
+                        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+                spinner_category.setAdapter(adapter_cat);
+            }
+        }.start();
     }
 }

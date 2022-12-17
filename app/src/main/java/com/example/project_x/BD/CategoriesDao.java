@@ -11,4 +11,7 @@ import io.reactivex.Flowable;
 public interface CategoriesDao {
     @Query("SELECT * FROM Categories")
     Flowable<List<Categories>> getCategories();
+
+    @Query("SELECT category_name FROM Categories")
+    List<String> getCategoriesName();
 }
