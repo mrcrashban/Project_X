@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import com.example.project_x.BD.DBClient;
 import com.example.project_x.BD.Transactions;
 
+import java.util.List;
+
 public class SubActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ImageButton go_back;
@@ -24,8 +26,6 @@ public class SubActivity extends AppCompatActivity implements AdapterView.OnItem
     private Button add_button;
     private EditText add_sum_insert, add_date_insert, add_comment_insert;
     private String type, add_acc_insert, add_cat_insert;
-    private String[] accounts = {"main","second","cash","credit card"};
-    private String[] categories = {"shop","car","home","restaurant","transport"};
     private Spinner spinner_account, spinner_category;
 
     @SuppressLint("MissingInflatedId")
@@ -47,16 +47,11 @@ public class SubActivity extends AppCompatActivity implements AdapterView.OnItem
         add_button = findViewById(R.id.button_add_sub);
         add_button.setOnClickListener(view -> saveTask());
         spinner_account = findViewById(R.id.spinner_add_account_sub);
-        spinner_category = findViewById(R.id.spinner_add_category_sub);
         spinner_account.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter_acc = new ArrayAdapter<>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, accounts);
-        spinner_account.setAdapter(adapter_acc);
+        runThreadAcc();
+        spinner_category = findViewById(R.id.spinner_add_category_sub);
         spinner_category.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter_cat = new ArrayAdapter<>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, categories);
-        spinner_category.setAdapter(adapter_cat);
-        add_acc_insert = "test";
+        runThreadCat();
     }
     private void saveTask() {
         final String sAcc = add_acc_insert;
@@ -103,5 +98,38 @@ public class SubActivity extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void runThreadAcc() {
+
+        new Thread() {
+            public void run() {
+                int i = 0;
+                List<String> list = DBClient
+                        .getInstance(getApplicationContext())
+                        .getAppDatabase()
+                        .AccountsDao()
+                        .getAccountsName();
+                ArrayAdapter<String> adapter_acc = new ArrayAdapter<>(SubActivity.this,
+                        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+                spinner_account.setAdapter(adapter_acc);
+            }
+        }.start();
+    }
+    private void runThreadCat() {
+
+        new Thread() {
+            public void run() {
+                int i = 0;
+                List<String> list = DBClient
+                        .getInstance(getApplicationContext())
+                        .getAppDatabase()
+                        .CategoriesDao()
+                        .getCategoriesName();
+                ArrayAdapter<String> adapter_cat = new ArrayAdapter<>(SubActivity.this,
+                        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+                spinner_category.setAdapter(adapter_cat);
+            }
+        }.start();
     }
 }

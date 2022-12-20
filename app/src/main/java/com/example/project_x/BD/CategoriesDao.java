@@ -1,6 +1,7 @@
 package com.example.project_x.BD;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Query;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface CategoriesDao {
 
     @Query("SELECT category_name FROM Categories")
     List<String> getCategoriesName();
+
+    @Delete
+    void delete(Categories c);
 }

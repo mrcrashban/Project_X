@@ -44,8 +44,24 @@ public class UpdateTransactionActivity extends AppCompatActivity {
         });
         btn_delete = findViewById(R.id.transaction_delete);
         btn_delete.setOnClickListener(view -> {
-            deleteTransaction(transactions);
-            startActivity(new Intent(UpdateTransactionActivity.this, MainActivity.class));
+            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateTransactionActivity.this);
+            builder.setTitle(R.string.sure);
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    deleteTransaction(transactions);
+                    startActivity(new Intent(UpdateTransactionActivity.this, MainActivity.class));
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+            AlertDialog ad = builder.create();
+            ad.show();
         });
 
 
