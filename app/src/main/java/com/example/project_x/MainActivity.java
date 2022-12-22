@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private Button btnGoAdd, btnGoSub, btnGoCat, btnGoAcc;
+    private Button btnGoAdd, btnGoSub, btnGoCat, btnGoAcc, btnGoRegular;
     private RecyclerView TransactionsView;
-    private int i, sum, counter;
+    private int counter;
     private TextView textView;
 
     @Override
@@ -61,31 +61,32 @@ public class MainActivity extends AppCompatActivity {
         btnGoSub = findViewById(R.id.button_go_to_sub);
         btnGoCat = findViewById(R.id.button_go_to_cat);
         btnGoAcc = findViewById(R.id.button_go_to_acc);
+        btnGoRegular = findViewById(R.id.go_regular_activity);
         textView = findViewById(R.id.textViewSummary);
         btnGoAdd.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent("com.example.project_x.AddActivity");
-                    startActivity(intent);
+                   goAddActivity();
                 }
         );
         btnGoSub.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent("com.example.project_x.SubActivity");
-                    startActivity(intent);
+                   goSubActivity();
                 }
         );
-        btnGoCat = findViewById(R.id.button_go_to_cat);
         btnGoCat.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent("com.example.project_x.CatActivity");
-                    startActivity(intent);
+                    goCatActivity();
                 }
         );
         btnGoAcc.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent("com.example.project_x.activity_acc");
-                    startActivity(intent);
+                   goAccActivity();
                 }
+        );
+        btnGoRegular.setOnClickListener(
+                v -> {
+            goRegularActivity();
+        }
         );
 
         TransactionsView = findViewById(R.id.RecyclerView_main);
@@ -104,7 +105,33 @@ public class MainActivity extends AppCompatActivity {
         runThread();
     }
 
-    private void runThread() {
+    public void goSubActivity() {
+        Intent intent = new Intent("com.example.project_x.SubActivity");
+        startActivity(intent);
+    }
+
+    public void goAddActivity() {
+        Intent intent = new Intent("com.example.project_x.AddActivity");
+        startActivity(intent);
+    }
+
+    public void goCatActivity() {
+        Intent intent = new Intent("com.example.project_x.CatActivity");
+        startActivity(intent);
+    }
+
+    public void goAccActivity() {
+        Intent intent = new Intent("com.example.project_x.activity_acc");
+        startActivity(intent);
+    }
+
+    public void goRegularActivity(){
+        Intent intent = new Intent("com.example.project_x.RegularActivity");
+        startActivity(intent);
+    }
+
+
+    public void runThread() {
 
         new Thread() {
             public void run() {

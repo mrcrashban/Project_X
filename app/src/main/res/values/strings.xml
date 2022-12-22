@@ -52,4 +52,6 @@
     <string name="sure">Вы уверены?</string>
     <string name="ok">Да</string>
     <string name="no">Нет</string>
+    <string name="regular_activity">Регулярные платежи</string>
+    <string name="regular_add">Добавить регулярный платеж</string>
 </resources>

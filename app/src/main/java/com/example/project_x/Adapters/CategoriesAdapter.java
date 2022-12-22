@@ -9,15 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_x.BD.Accounts;
 import com.example.project_x.BD.Categories;
+import com.example.project_x.BD.DBClient;
 import com.example.project_x.R;
 
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
-    private final Context context;
-    private final List<Categories> CategoriesList;
+    private static Context context;
+    private static List<Categories> CategoriesList;
 
     public CategoriesAdapter(Context mCtx, List<Categories> CategoriesList) {
         this.context = mCtx;
@@ -54,7 +56,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         @Override
         public void onClick(View view) {
-
+            new Thread(()->{
+                Categories categories = CategoriesList.get(getAdapterPosition());
+                DBClient.getInstance(context.getApplicationContext()).getAppDatabase().CategoriesDao().delete(categories);
+            }).start();
         }
     }
 }
